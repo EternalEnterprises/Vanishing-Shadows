@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Models/Assets/Character Pack/scene2.unity
+- path: Assets/Models/Assets/Scene/Test 1.unity
   isLoaded: 1
   isActive: 1
