@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class LoadContinue : MonoBehaviour {
 	public int levelCount;
@@ -15,6 +16,6 @@ public class LoadContinue : MonoBehaviour {
 			}
 		}
 		// loads the apropriate scene
-		Application.LoadLevel(level);
+		SceneManager.LoadScene(level);
 	}
 }
