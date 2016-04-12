@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class LoadOnClick : MonoBehaviour {
 	
 	public void loadScene(int level){
-		Application.LoadLevel(level);
+		SceneManager.LoadScene (level);
 	}
 }
