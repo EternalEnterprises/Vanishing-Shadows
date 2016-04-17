@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 1dabb5bfc63fdb0458816c41ac44f9fc
+timeCreated: 1460922753
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - navPointIntruder: {instanceID: 0}
+  - Eyes: {instanceID: 0}
+  - SightCone: {instanceID: 0}
+  - navMeshAgent: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
