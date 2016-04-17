@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Serching_state : MonoBehaviour {
+public class Guard_Controler : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
