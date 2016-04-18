@@ -21,6 +21,14 @@ public class Ninja : MonoBehaviour {
 			print("Pressed input");
 		}
 
+		if(Input.GetKeyDown("c")) 
+
+		{
+			anim.Play("Male_Crouch_Pose", -1, 0f);
+
+			print("Pressed input");
+		}
+
 		if (Input.GetKeyDown ("j")) 
 		{
 			anim.Play("jumping", -1, 0.25f);
