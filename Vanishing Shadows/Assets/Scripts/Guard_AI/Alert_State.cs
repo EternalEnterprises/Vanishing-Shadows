@@ -30,7 +30,7 @@ public class Alert_State : GuardAI_Interface
     }
 
     //triggers if the player walks within the sight radios as denoted by the spheirColider
-   public void OnTriggerEnter(Collider other)
+   public void OnTriggerStay(Collider other)
     {
         suspicion++;
         //start chasing if you keep the Player in sight long enough
