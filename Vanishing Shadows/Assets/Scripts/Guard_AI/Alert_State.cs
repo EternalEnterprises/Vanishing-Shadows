@@ -16,7 +16,13 @@ public class Alert_State : GuardAI_Interface
     public void UpdateState()
     {
         //set guards sight cone to red.
-        guard.SightCone.color = Color.red;
+        if (suspicion < guard.suspucionCap)
+        {
+            guard.SightCone.color = Color.yellow;
+        }
+        else {
+            guard.SightCone.color = Color.red;
+        }
         //seting the guards navigation to where he saw you last
         guard.navMeshAgent.destination = guard.navPointIntruder.position;
         guard.navMeshAgent.Resume();

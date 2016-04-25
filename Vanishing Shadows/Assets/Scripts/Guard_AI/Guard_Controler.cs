@@ -13,7 +13,7 @@ public class Guard_Controler : MonoBehaviour {
     public float sightRange = 30f;
     public Transform [] navPointsPatrol;
     public Transform navPointIntruder;
-    public Vector3[] offset = new Vector3[5];
+    public Vector3[] offset = new Vector3[13];
 
     [HideInInspector] public GuardAI_Interface currentState;
     [HideInInspector] public Alert_State alertState;
@@ -23,7 +23,8 @@ public class Guard_Controler : MonoBehaviour {
     [HideInInspector] public Animator guardMovment;
     [HideInInspector] public Light SightCone;
     [HideInInspector] public Transform Eyes;
-
+    [HideInInspector] public Transform sightLine;
+    [HideInInspector] public float sightReduction = 1;
     //creating the states
     private void Awake() {
         alertState = new Alert_State(this);
@@ -33,6 +34,7 @@ public class Guard_Controler : MonoBehaviour {
         guardMovment = GetComponent<Animator> ();
         SightCone = SightConeObj.GetComponentInChildren<Light>();
         Eyes = EyesObj.GetComponentInChildren<Transform>();
+        sightLine = Eyes;
 
 }
 
@@ -53,12 +55,40 @@ public class Guard_Controler : MonoBehaviour {
         if (other.CompareTag("Player")) {
             //raycasts to see if the guard can see the Player
             RaycastHit hit;
-            //cycaling thru all 5 rays
+            //cycaling thru all 13 rays
             for (int i = 0; i < offset.Length; i++) {
                 //print("Ray loop");
-                Ray sightRay = new Ray(Eyes.position, Eyes.forward - offset[i]);
-                //Debug.DrawRay(Eyes.position, sightRay.direction*sightRange, Color.red);
-                if (Physics.Raycast(sightRay, out hit, sightRange) && hit.collider.CompareTag("Player"))
+                //reducing sight range if ray is parrifary vison
+                sightReduction = 1;
+                switch (i) {
+                    case 0:
+                    case 12:
+                        sightReduction = 4f;
+                        break;
+                    case 1:
+                    case 11:
+                        sightReduction = 3.25f;
+                        break;
+                    case 2:
+                    case 10:
+                        sightReduction = 2.50f;
+                        break;
+                    case 3:
+                    case 9:
+                        sightReduction = 1.75f;
+                        break;
+                    default:
+                        sightReduction = 1f;
+                        break;
+                }
+                if (i > 0)
+                {
+                    sightLine.Rotate(-offset[i - 1]);
+                }
+                sightLine.Rotate(offset[i]);
+                Ray sightRay = new Ray(sightLine.position, sightLine.forward);
+                Debug.DrawRay(sightLine.position, sightRay.direction*(sightRange/sightReduction), Color.red);
+                if (Physics.Raycast(sightRay, out hit, sightRange/sightReduction) && hit.collider.CompareTag("Player"))
                 {
                     //set the intruder nav point to the players curent vector
                     print("sean player");
