@@ -100,7 +100,7 @@ public class Guard_Controler : MonoBehaviour
                 }
                 sightLine = Quaternion.Euler(offset[i]) * Eyes.forward;
                 Ray sightRay = new Ray(Eyes.position, sightLine);
-                //Debug.DrawRay(Eyes.position, sightRay.direction * (sightRange / sightReduction), Color.red);
+                Debug.DrawRay(Eyes.position, sightRay.direction * (sightRange / sightReduction), Color.red);
                 if (Physics.Raycast(sightRay, out hit, sightRange / sightReduction) && hit.collider.CompareTag("Player"))
                 {
                     //set the intruder nav point to the players curent vector
