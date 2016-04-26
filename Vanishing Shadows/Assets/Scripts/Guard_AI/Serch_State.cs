@@ -33,7 +33,7 @@ public class Serch_State : GuardAI_Interface
     }
 
     //triggers if the player walks within the sight radios as denoted by the spheirColider
-    public void OnTriggerEnter(Collider other)
+    public void OnTriggerStay(Collider other)
     {
         // you have seen the Player change to allert state
         ToAlertState();
