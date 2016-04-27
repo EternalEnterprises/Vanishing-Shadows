@@ -23,8 +23,10 @@ public class Gamecontroller : MonoBehaviour {
 				Time.timeScale = 0;
 			}else{
 				// closes pause menu
-				pauseMenu.SetActive(false);
-				Time.timeScale = 1;
+				if (!deathMenu.activeSelf) {
+					pauseMenu.SetActive (false);
+					Time.timeScale = 1;
+				}
 			}
 		}
 
