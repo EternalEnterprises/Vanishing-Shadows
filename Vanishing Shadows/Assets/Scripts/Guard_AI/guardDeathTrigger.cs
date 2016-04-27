@@ -11,7 +11,6 @@ public class guardDeathTrigger : MonoBehaviour {
 
     void OnTriggerEnter(Collider other) {
         if (other.CompareTag("Player")) {
-
             PlayerPrefs.SetInt("death", 1);
         }
     }

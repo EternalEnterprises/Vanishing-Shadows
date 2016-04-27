@@ -28,7 +28,7 @@ public class Patrol_State : GuardAI_Interface {
 
 
     //triggers if the guard can see the player
-    public void OnTriggerEnter(Collider other)
+    public void OnTriggerStay(Collider other)
     {
             //go and investigate
             ToAlertState();

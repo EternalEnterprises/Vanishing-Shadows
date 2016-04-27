@@ -4,9 +4,9 @@ using UnityEngine.SceneManagement;
 
 public class checkpointScript : MonoBehaviour {
 	public int level;
-	public int levelCount = 3;
+	public int levelCount = 4;
 
-    void OnTriggerEnter(Collider other) {
+    void OnTriggerStay(Collider other) {
         if (other.CompareTag("Player")) {
             PlayerPrefs.SetInt(level.ToString(), 1);
             if (level < levelCount) {
