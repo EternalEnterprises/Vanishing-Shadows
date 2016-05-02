@@ -5,8 +5,10 @@ public interface GuardAI_Interface {
 
     //teling how to update the curent state
     void UpdateState();
-    //returns true if the player is in front of the guard and inside of their sight radeose
-    void OnTriggerStay(Collider other);
+    //returns true if the guard can see the player
+    void visible();
+    //returns true if the player is withen range of the guard to apprehend
+    void OnTriggerEnter(Collider other);
 
     // Transition to Serch_State
     void ToSerchState();

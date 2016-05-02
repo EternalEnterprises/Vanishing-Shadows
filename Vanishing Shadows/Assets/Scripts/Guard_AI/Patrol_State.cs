@@ -15,23 +15,30 @@ public class Patrol_State : GuardAI_Interface {
         //set guards sight cone to white
         guard.SightCone.color = Color.white;
         //making sure the guard is walking 
+
         guard.navMeshAgent.speed = guard.walkingSpeed;
+        guard.guardMovment.SetBool("IsWalking", true);
+        guard.guardMovment.SetBool("IsRunning", false);
+        guard.guardMovment.SetBool("isIdle", false);
+        guard.guardMovment.SetBool("isAttacking", false);
         //seting destonation to the next nav point in the patrole
         guard.navMeshAgent.destination = guard.navPointsPatrol[nextNavPoint].position;
         guard.navMeshAgent.Resume();
         //cheking to see if you have made it to the next patrole point yet
         if (guard.navMeshAgent.remainingDistance <= guard.navMeshAgent.stoppingDistance && !guard.navMeshAgent.pathPending) {
             //looping to the next patrole navPoint
+            guard.guardMovment.SetBool("IsWalking", false);
+            guard.guardMovment.SetBool("IsRunning", false);
+            guard.guardMovment.SetBool("isIdle", true);
+            guard.guardMovment.SetBool("isAttacking", false);
             nextNavPoint = (nextNavPoint + 1) % guard.navPointsPatrol.Length;
         }
     }
 
 
     //triggers if the guard can see the player
-    public void OnTriggerStay(Collider other)
+    public void OnTriggerEnter(Collider other)
     {
-            //go and investigate
-            ToAlertState();
     }
 
 
@@ -46,6 +53,13 @@ public class Patrol_State : GuardAI_Interface {
         //show visual feed back that the guard has spoted you.
 
         guard.currentState = guard.alertState;
+    }
+
+    //returns true if the guard can see the player
+    public void visible()
+    {
+        //go and investigate
+        ToAlertState();
     }
 
     //can not transition to these states from Patrol
