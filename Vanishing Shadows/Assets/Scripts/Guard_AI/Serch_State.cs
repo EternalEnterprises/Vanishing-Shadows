@@ -18,6 +18,10 @@ public class Serch_State : GuardAI_Interface
     {
         //set guards sight cone to yello
         guard.SightCone.color = Color.yellow;
+        guard.guardMovment.SetBool("IsWalking", false);
+        guard.guardMovment.SetBool("IsRunning", false);
+        guard.guardMovment.SetBool("isIdle", true);
+        guard.guardMovment.SetBool("isAttacking", false);
         //turn around looking for the player untill time runs out
         guard.transform.Rotate(0, guard.serchingTurnSpeed * Time.deltaTime, 0);
 
@@ -33,10 +37,8 @@ public class Serch_State : GuardAI_Interface
     }
 
     //triggers if the player walks within the sight radios as denoted by the spheirColider
-    public void OnTriggerStay(Collider other)
+    public void OnTriggerEnter(Collider other)
     {
-        // you have seen the Player change to allert state
-        ToAlertState();
     }
 
     //if #of frames is exosted then return to patrole_State
@@ -50,13 +52,16 @@ public class Serch_State : GuardAI_Interface
     //this guard has seen the player transition into alert_State and set NavePointIntruder to players curent location
     public void ToAlertState()
     {
-        guard.navMeshAgent.Stop();
-        //show visual feed back that the guard has spoted you.
-
         //reseting TimeSerched for the next time serch state is called
         serchTime = 0f;
         guard.navMeshAgent.Stop();
         guard.currentState = guard.alertState;
+    }
+
+    //returns true if the guard can see the player
+   public  void visible() {
+        // you have seen the Player change to allert state
+        ToAlertState();
     }
 
     //can not transition to this state from here

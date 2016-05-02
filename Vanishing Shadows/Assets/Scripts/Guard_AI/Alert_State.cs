@@ -19,9 +19,17 @@ public class Alert_State : GuardAI_Interface
         if (suspicion < guard.suspucionCap)
         {
             guard.SightCone.color = Color.yellow;
+            guard.guardMovment.SetBool("IsWalking", true);
+            guard.guardMovment.SetBool("IsRunning", false);
+            guard.guardMovment.SetBool("isIdle", false);
+            guard.guardMovment.SetBool("isAttacking", false);
         }
         else {
             guard.SightCone.color = Color.red;
+            guard.guardMovment.SetBool("IsWalking", false);
+            guard.guardMovment.SetBool("IsRunning", true);
+            guard.guardMovment.SetBool("isIdle", false);
+            guard.guardMovment.SetBool("isAttacking", false);
         }
         //seting the guards navigation to where he saw you last
         guard.navMeshAgent.destination = guard.navPointIntruder.position;
@@ -36,14 +44,8 @@ public class Alert_State : GuardAI_Interface
     }
 
     //triggers if the player walks within the sight radios as denoted by the spheirColider
-   public void OnTriggerStay(Collider other)
+   public void OnTriggerEnter(Collider other)
     {
-        suspicion++;
-        //start chasing if you keep the Player in sight long enough
-        if (suspicion >= guard.suspucionCap) {
-            //make the guard start running
-            guard.navMeshAgent.speed = guard.runingSpeed;
-        }
 
     }
 
@@ -58,6 +60,11 @@ public class Alert_State : GuardAI_Interface
         guard.currentState = guard.serchState;
     }
 
+    //returns true if the guard can see the player
+   public void visible()
+    {
+        suspicion++;
+    }
 
     //Can not Transioin to these States from hear
     public void ToAlertState() {
