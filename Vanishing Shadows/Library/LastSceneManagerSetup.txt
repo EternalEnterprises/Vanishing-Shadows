@@ -1,8 +1,12 @@
 sceneSetups:
 <<<<<<< HEAD
+<<<<<<< HEAD
 - path: Assets/Scenes/Level Scenes/Main.unity
 =======
 - path: Assets/Scenes/Level Scenes/Level 1/Level 1_1.unity
 >>>>>>> refs/remotes/origin/ninja-fixes
+=======
+- path: Assets/Scenes/Level Scenes/Level 1/Level 1_1.unity
+>>>>>>> origin/master
   isLoaded: 1
   isActive: 1
